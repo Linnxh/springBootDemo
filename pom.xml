@@ -99,7 +99,7 @@
 	</profiles>
 
 	<build>
-		<finalName>lxhdemo</finalName>
+		<finalName>demo</finalName>
 		<!--<resources>-->
 			<!--<resource>-->
 				<!--<filtering>true</filtering>-->
