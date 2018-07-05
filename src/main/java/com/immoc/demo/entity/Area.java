@@ -1,5 +1,7 @@
 package com.immoc.demo.entity;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,8 +9,8 @@ public class Area implements Serializable {
     private Integer areaId;
     private String areaName;
     private Integer priority;
-    private Date createTime;
-    private Date lastEditTime;
+    private String createTime;
+    private String lastEditTime;
 
     public Integer getAreaId() {
         return areaId;
@@ -34,19 +36,19 @@ public class Area implements Serializable {
         this.priority = priority;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getLastEditTime() {
+    public String getLastEditTime() {
         return lastEditTime;
     }
 
-    public void setLastEditTime(Date lastEditTime) {
+    public void setLastEditTime(String lastEditTime) {
         this.lastEditTime = lastEditTime;
     }
 

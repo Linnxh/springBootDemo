@@ -37,8 +37,8 @@ public class AreaDaoTest {
         Area area=new Area();
         area.setAreaName("南苑1");
         area.setPriority(3);
-        area.setCreateTime(new Date());
-        area.setLastEditTime(new Date());
+        area.setCreateTime("2019-01-01");
+        area.setLastEditTime("2019-01-01");
         int i = areaDao.insertArea(area);
         assertEquals(1,i);
     }
@@ -48,7 +48,7 @@ public class AreaDaoTest {
         Area area=new Area();
         area.setAreaName("南苑啦啦");
         area.setAreaId(2);
-        area.setLastEditTime(new Date());
+//        area.setLastEditTime(new Date());
         int i = areaDao.updateArea(area);
         assertEquals(1,i);
     }

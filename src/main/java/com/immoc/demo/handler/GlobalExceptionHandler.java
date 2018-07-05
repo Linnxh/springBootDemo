@@ -1,6 +1,8 @@
 package com.immoc.demo.handler;
 
 
+import com.immoc.demo.entity.Result;
+import com.immoc.demo.utils.ResultUtil;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,13 +15,14 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     //自定义全局异常
-    @ExceptionHandler(value = {AreaException.class, Exception.class})
+    @ExceptionHandler(value = {DemoException.class, Exception.class})
     @ResponseBody
-    private Map<String, Object> exceptionHandler(HttpServletRequest request, Exception e) {
-        Map<String, Object> modelMap = new HashMap<>();
-        modelMap.put("success", false);
-        modelMap.put("errMsg", e.getMessage());
-        return modelMap;
+    private Result exceptionHandler(HttpServletRequest request, Exception e) {
+        if (e instanceof DemoException) {
+            return ResultUtil.error(100, e.getMessage());
+        } else {
+            return ResultUtil.error(500, "系统未知异常");
+        }
 
     }
 

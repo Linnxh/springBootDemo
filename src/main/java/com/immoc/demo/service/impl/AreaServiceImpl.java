@@ -2,8 +2,11 @@ package com.immoc.demo.service.impl;
 
 import com.immoc.demo.dao.AreaDao;
 import com.immoc.demo.entity.Area;
-import com.immoc.demo.handler.AreaException;
+import com.immoc.demo.entity.Result;
+import com.immoc.demo.handler.DemoException;
 import com.immoc.demo.service.AreaService;
+import com.immoc.demo.utils.ResultUtil;
+import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,48 +29,49 @@ public class AreaServiceImpl implements AreaService {
         return areaDao.querAreaById(areaId);
     }
 
+    public Area querAreaid(int areaId) {
+        return areaDao.querAreaById(areaId);
+    }
+
     //默认值处理Exception级别的
     @Transactional
     @Override
-    public int insertArea(Area area) {
+    public Result insertArea(Area area) {
+
+        if (area == null || StringUtils.isNullOrEmpty(area.getAreaName())) {
+            /*****返回格式统一化***/
+            return ResultUtil.error(2, "名称不能为空");
+        }
+
         if (area == null || area.getAreaName() == null) {
-            throw new AreaException("区域信息名称不能为空");
+            throw new DemoException("区域信息名称不能为空");
         }
-        try {
-            area.setCreateTime(new Date());
-            area.setLastEditTime(new Date());
-            int i = areaDao.insertArea(area);
-            return i;
-        } catch (Exception e) {
-            throw new AreaException("插入区域信息失败");
-        }
+        int i = areaDao.insertArea(area);
+        return ResultUtil.success();
+
 
     }
 
     @Override
     public int updateArea(Area area) {
-        if (area == null || area.getAreaId() <= 0 ) {
-            throw new AreaException("区域信息id,不能为空");
+        if (area == null || area.getAreaId() <= 0) {
+            throw new DemoException("区域信息id,不能为空");
         }
-        try {
-            int i = areaDao.updateArea(area);
-            return i;
-        } catch (Exception e) {
-            throw new AreaException("修改区域信息失败");
-        }
+
+        int i = areaDao.updateArea(area);
+        return i;
+
 
     }
 
     @Override
     public int deleteArea(Area area) {
         if (area == null || area.getAreaId() <= 0) {
-            throw new AreaException("删除信息id不能为空");
+            throw new DemoException("删除信息id不能为空");
         }
-        try {
-            int i = areaDao.deleteArea(area);
-            return i;
-        } catch (Exception e) {
-            throw new AreaException("删除区域信息失败");
-        }
+
+        int i = areaDao.deleteArea(area);
+        return i;
+
     }
 }

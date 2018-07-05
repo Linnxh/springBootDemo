@@ -1,6 +1,7 @@
 package com.immoc.demo.service;
 
 import com.immoc.demo.entity.Area;
+import com.immoc.demo.entity.Result;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface AreaService {
 
     Area querAreaById(int areaId);
 
-    int insertArea(Area area);
+    Result insertArea(Area area);
 
     int updateArea(Area area);
 
